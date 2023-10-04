@@ -19,11 +19,11 @@ export class DataService {
     .set("itemPerPage", itemPerPage.toString())
     .set("pageNumber", pageNumber.toString())
     .set('sortOrder', 'asc')
-    .set('sortBy', 'name')
+    .set('sortBy', 'id')
     .set('search', '')
     .set('searchBy', 'name');
 
-    return this.httpClient.get<Users[]>(`${this.baseUrl}/users/by-filters`);
+    return this.httpClient.get<any>(`${this.baseUrl}/users/by-filters`, {params});
   }
 
 
@@ -37,6 +37,21 @@ export class DataService {
 
     return this.httpClient.post(url, organizationPic);
   }
+
+  changeStatusById(id: number, name: string) : Observable<any>{
+    const params = new HttpParams()
+    .set('id', id.toString())
+    .set('name', name);
+
+    return this.httpClient.put<any>(`${this.baseUrl}/change-status`, params);
+  }
 }
+
+
+
+
+
+
+
 
 
