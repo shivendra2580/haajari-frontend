@@ -21,3 +21,5 @@ export class Enterprise{
     slackEnterpriseId !: string;
     apiAppId !: string;
 }
+
+

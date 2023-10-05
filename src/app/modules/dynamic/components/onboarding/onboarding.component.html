@@ -78,30 +78,28 @@
                                                          <input type="text" class="form-control" id="username" placeholder="Enter Company Name ..." [(ngModel)]="name" [ngModelOptions]="{standalone:true}" required="">
                                                      </div>
                                                  </div>
+                                                
                                                  <div class="col-md-6">
-                                                     <div class="mb-3">
-                                                         <label for="exampleFormControlSelect1" style="padding-bottom: 6px;">Select Country</label>
-                                                         <select class="form-select" id="exampleFormControlSelect1" [(ngModel)]="country" [ngModelOptions]="{standalone:true}" >
-                                                         <option>Select Country</option>
-                                                         <option>2</option>
-                                                         <option>3</option>
-                                                         <option>4</option>
-                                                         <option>5</option>
-                                                         </select>
-                                                     </div>
-                                                 </div>
-                                                 <div class="col-md-6">
-                                                     <div class="mb-3">
-                                                         <label for="exampleFormControlSelect1 pb-2" style="padding-bottom: 6px;" > Select State</label>
-                                                             <select class="form-select" id="exampleFormControlSelect1" [(ngModel)]="state" [ngModelOptions]="{standalone:true}">
-                                                             <option>Select State</option>
-                                                             <option>2</option>
-                                                             <option>3</option>
-                                                             <option>4</option>
-                                                             <option>5</option>
-                                                             </select>
-                                                     </div>
-                                                 </div>
+                                                    <div class="mb-3">
+                                                      <label for="exampleFormControlSelect1" style="padding-bottom: 6px;">Select Country</label>
+                                                      <select class="form-select" id="exampleFormControlSelect1" [(ngModel)]="country" (change)="updateStates()" [ngModelOptions]="{standalone: true}">
+                                                        <option>Select Country</option>
+                                                        <option *ngFor="let c of countries">{{ c.name }}</option>
+                                                      </select>
+                                                    </div>
+                                                  </div>
+                                                  
+                                                  <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                      <label for="exampleFormControlSelect2" style="padding-bottom: 6px;">Select State</label>
+                                                      <select class="form-select" id="exampleFormControlSelect2" [(ngModel)]="state" [ngModelOptions]="{standalone: true}">
+                                                        <option>Select State</option> 
+                                                        <option *ngFor="let s of states">{{s}}</option>
+                                                      </select>
+                                                    </div>
+                                                  </div>
+                                                  
+                                        
                                                  <div class="col-md-6">
                                                      <div class="mb-3">
                                                          <label for="exampleFormControlSelect1 pb-2" style="padding-bottom: 6px;"> Brand Logo</label>
@@ -151,10 +149,10 @@
                                                          </thead>
                                                          <tbody>
                                                              <tr>  
-                                                                 <td class="text-center"> 10:00 AM</td>                                   
-                                                                 <td class="text-center"> 07:00 PM</td>
+                                                                 <td class="text-center">{{loginArray.inTime}}</td>                                   
+                                                                 <td class="text-center">{{loginArray.outTime}}</td>
                                                                  <!-- <td class="text-center"> 01:00 PM/2:00PM</td> -->
-                                                                 <td class="text-center"> 09:00 PM</td>
+                                                                 <td class="text-center">{{loginArray.workingHour}}</td>
                                                              </tr><!--end tr-->     
                                                             
                                                                                        
@@ -173,10 +171,10 @@
                                                          </thead>
                                                          <tbody>
                                                              <tr>  
-                                                                 <td class="text-center"> 01:00 AM</td>                                   
-                                                                 <td class="text-center"> 02:00 PM</td>
+                                                                 <td class="text-center">{{loginArray.startLunch}}</td>                                   
+                                                                 <td class="text-center">{{loginArray.endLunch}}</td>
                                                                  <!-- <td class="text-center"> 01:00 PM/2:00PM</td> -->
-                                                                 <td class="text-center"> 01:00 PM</td>
+                                                                 <td class="text-center">{{loginArray.totalHour}}</td>
                                                              </tr><!--end tr-->     
                                                             
                                                                                        
@@ -319,54 +317,17 @@
                                                              </tr><!--end tr-->
                                                          </thead>
                                                          <tbody>
-                                                             <tr>  
-                                                                 <td>Sick Leave</td> 
-                                                                 <td> <span class="badge badge-soft-success">Paid</span></td>                                   
-                                                                 <td class="text-center"> 8</td>
-                                                                 <td class="text-center">
-                                                                     <div class="">
-                                                                     <input type="checkbox" id="switch12" class="d-none"/>
-                                                                     <label for="switch12" class="hafday">Toggle</label>
-                                                                 </div>
-                                                             </td>
-                                                                 <!-- <td class="text-center">
-                                                                     <button type="button" class="editdata pointer mr-2" data-bs-toggle="modal" data-bs-target="#requestleave" >
-                                                                         <i class="bi bi-pencil-square menu-icon"></i>
-                                                                     </button>
-                                                                     <button type="button" class="deltrash pointer" >
-                                                                         <i class="bi bi-trash menu-icon"></i>
-                                                                     </button>
-                                                                 </td> -->
-                                                             </tr><!--end tr-->     
-                                                             <tr>                                                        
-                                                                 <td>Casual Leave</td>                                   
-                                                                 <td> <span class="badge badge-soft-success">Paid</span></td>
-                                                                 <td class="text-center">0</td>
-                                                                 <td class="text-center">
-                                                                     <div class="">
-                                                                         <input type="checkbox" id="switch13" class="d-none"/>
-                                                                         <label for="switch13" class="hafday">Toggle</label>
-                                                                     </div>
-                                                                 </td>
-                                                                 <!-- <td class="text-center">
-                                                                     <button type="button" class="editdata pointer mr-2" data-bs-toggle="modal" data-bs-target="#requestleave">
-                                                                         <i class="bi bi-pencil-square menu-icon"></i>
-                                                                     </button>
-                                                                     <button type="button" class="deltrash pointer" >
-                                                                         <i class="bi bi-trash menu-icon"></i>
-                                                                     </button>
-                                                                 </td> -->
-                                                             </tr><!--end tr-->    
-                                                             <tr>                                                        
-                                                                 <td>Annual Leave</td>                                   
-                                                                 <td> <span class="badge badge-soft-success">Paid</span></td>
-                                                                 <td class="text-center">0</td>
-                                                                 <td class="text-center"><div class="">
-                                                                     <input type="checkbox" id="switch14" class="d-none"/>
-                                                                     <label for="switch14" class="hafday">Toggle</label>
-                                                                 </div></td>
-                                                                
-                                                             </tr><!--end tr-->    
+                                                            <tr *ngFor="let sav of savel"> 
+                                                                 <td>{{sav.leaveType}}</td> 
+                                                                 <td> <span class="badge badge-soft-success">{{sav.leaveStatus}}</span></td>                                   
+                                                                 <td class="text-center">{{sav.leaveEntitled}}</td>
+                                    
+                                                                <td class="text-center">
+                                                                    <div class="">
+                                                                        <input type="checkbox" [(ngModel)]="sav.status" (change)="updateLeaveStatus(sav)" id="switch{{sav.id}}" class="d-none"/>
+                                                                        <label for="switch{{sav.id}}" class="hafday">Toggle</label>
+                                                                    </div>
+                                                                </td>
                                                                                        
                                                          </tbody>
                                                      </table> <!--end table-->                                               
@@ -377,20 +338,7 @@
                                      </div>
                                  </div>
                              </div>
-                             <!-- <div class="accordion-item">
-                                 <h5 class="accordion-header m-0" id="headingfive">
-                                     <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapsefive" aria-expanded="false" aria-controls="collapsefive">
-                                         Accordion Item #3
-                                     </button>
-                                 </h5>
-                                 <div id="collapsefive" class="accordion-collapse collapse" aria-labelledby="headingfive" data-bs-parent="#accordionExample">
-                                     <div class="accordion-body">
-                                         <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as
-                                         well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the
-                                         <code>.accordion-body</code>, though the transition does limit overflow.
-                                     </div>
-                                 </div>
-                             </div> -->
+                             
                          </div>                                 
                      </div><!--end card-body-->
                  </div><!--end card-->
@@ -566,7 +514,8 @@
          </div>
          <div class="modal-footer">
            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-           <button type="button" class="btn btn-primary">Apply</button>
+           
+           <button type="button" class="btn btn-primary" >Apply</button>
          </div>
        </div>
      </div>
@@ -583,27 +532,27 @@
          <div class="modal-body">
              <div class="">
  
-              <form>
+              <form >
                  <div class="mb-3">
                      <label class="mb-3"> Leave Type </label>
                      <div class="input-group">
-                         <input type="text" class="form-control" placeholder="Leave Type" >
+                         <input type="text" class="form-control" placeholder="Leave Type"  [(ngModel)]="leaveData.leaveType" [ngModelOptions]="{standalone:true}">
                      </div> 
                  </div>
                  <div class="mb-3">
                      <label class="mb-3"> Leave Entitled</label>
                      <div class="input-group">
-                         <input type="text" class="form-control" placeholder="Leave Entitled" >
+                         <input type="text" class="form-control" placeholder="Leave Entitled" [(ngModel)]="leaveData.leaveEntitled" [ngModelOptions]="{standalone:true}" >
                      </div> 
                  </div>
  
                  <div class="mb-3">
                      <div class="form-check form-check-inline">
-                         <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                         <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="paid" [(ngModel)]="leaveData.leaveStatus" [ngModelOptions]="{standalone:true}">
                          <label class="form-check-label" for="inlineRadio1">Paid</label>
                      </div>
                      <div class="form-check form-check-inline">
-                         <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                         <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="unpaid" [(ngModel)]="leaveData.leaveStatus" [ngModelOptions]="{standalone:true}">
                          <label class="form-check-label" for="inlineRadio2">Unpaid</label>
                      </div>
                  </div>
@@ -613,7 +562,7 @@
          </div>
          <div class="modal-footer">
            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-           <button type="button" class="btn btn-primary">Save</button>
+           <button type="button" class="btn btn-primary" (click)="onSubmit()" >Save</button>
          </div>
        </div>
      </div>
@@ -634,27 +583,27 @@
                  <div class="mb-3">
                      <label class="mb-3"> In Time </label>
                      <div class="input-group">
-                         <input type="time" class="form-control" placeholder="" >
+                         <input type="time" class="form-control" placeholder="" [(ngModel)]="loginArray.inTime"  [ngModelOptions]="{standalone:true}">
                      </div> 
                  </div>
                  <div class="mb-3">
                      <label class="mb-3"> Out Time </label>
                      <div class="input-group">
-                         <input type="time" class="form-control"  >
+                         <input type="time" class="form-control" [(ngModel)]="loginArray.outTime"  [ngModelOptions]="{standalone:true}" >
                      </div> 
                  </div>
  
                  <div class="mb-3">
                      <label class="mb-3"> Start Lunch Time </label>
                      <div class="input-group">
-                         <input type="time" class="form-control"  >
+                         <input type="time" class="form-control" [(ngModel)]="loginArray.startLunch"  [ngModelOptions]="{standalone:true}" >
                      </div> 
                  </div>
  
                  <div class="mb-3">
                      <label class="mb-3">  End Lunch Time </label>
                      <div class="input-group">
-                         <input type="time" class="form-control"  >
+                         <input type="time" class="form-control" [(ngModel)]="loginArray.endLunch"  [ngModelOptions]="{standalone:true}" >
                      </div> 
                  </div>
                 
@@ -663,7 +612,7 @@
          </div>
          <div class="modal-footer">
            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-           <button type="button" class="btn btn-primary">Save</button>
+           <button type="button" class="btn btn-primary" (click)="addShift()">Save</button>
          </div>
        </div>
      </div>
