@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Users } from 'src/app/models/users';
 import { DataService } from 'src/app/services/data.service';
 
@@ -9,23 +10,46 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class UserlistComponent implements OnInit {
 
-  constructor(private dataService : DataService) { }
+
+  constructor(private dataService : DataService, private router : Router) { }
 
   users : Users[] = [];
-  itemPerPage : number = 120;
+  itemPerPage : number = 6;
   pageNumber : number = 1;
+  total !: number;
+  rowNumber : number = 1;
 
   ngOnInit(): void {
-    this.getUsersByFiltersFuntion();
+    this.getUsersByFiltersFunction();
   }
 
-  getUsersByFiltersFuntion() {
-    this.dataService.getUsersByFilter(this.itemPerPage,this.pageNumber).subscribe(data => {
-      this.users = data;
+  getUsersByFiltersFunction() {
+    this.dataService.getUsersByFilter(this.itemPerPage,this.pageNumber).subscribe((data : any) => {
+      this.users = data.users;
+      this.total = data.count;
       console.log(this.users);
     }, (error) => {
       console.log(error);
+      console.log("-----------------------------")
     })
+  }
+
+  changeStatus(id: number, name : string){
+    this.dataService.changeStatusById(id,name).subscribe((data) =>{
+      console.log(data);
+      console.log("====================");
+    }, (error) => {
+      console.log(error);
+      console.log("-------------------------------")
+    })
+  }
+
+  
+
+  onTableDataChange(event : any)
+  {
+    this.pageNumber=event;
+    this.getUsersByFiltersFunction();
   }
 
 }

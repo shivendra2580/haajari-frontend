@@ -15,6 +15,7 @@ import { LoginComponent } from './components/login/login.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { UserlistComponent } from './components/userlist/userlist.component';
 import { FormsModule } from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     DynamicRoutingModule,
     CommonModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ]
 })
 export class DynamicModule { }

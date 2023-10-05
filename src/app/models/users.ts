@@ -1,9 +1,10 @@
 export class Users {
-    usersId !: number;
+    id !: number;
     name !: string;
     slackUserId !: string;
     enterprise !: Enterprise;
     organization !: Organization;
+    status !: Status;
 }
 
 export class Organization{
@@ -22,4 +23,8 @@ export class Enterprise{
     apiAppId !: string;
 }
 
-
+export class Status{
+    id !: number;
+    name !: string;
+    desc !: string;
+}
