@@ -42,7 +42,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr *ngFor="let user of users | paginate : { itemsPerPage: itemPerPage, currentPage: pageNumber, totalItems: total}; let i = index">
+                                    <tr *ngFor=" let i = index, let user of users | paginate : { itemsPerPage: itemPerPage, currentPage: pageNumber, totalItems: total};">
                                         <th scope="row">{{user.id}}</th>
                                         <td>{{user.name}}</td>
                                         <td>{{user.slackUserId}}</td>
