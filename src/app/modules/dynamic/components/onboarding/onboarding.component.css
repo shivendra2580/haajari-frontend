@@ -356,5 +356,7 @@ textarea.form-control {
   font-weight: bold;
 }
 #submitButton{
-  text-align: center;
+  text-align: left;
+  margin-left: 5%;
 }
+

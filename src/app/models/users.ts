@@ -4,6 +4,7 @@ export class Users {
     slackUserId !: string;
     enterprise !: Enterprise;
     organization !: Organization;
+    presenceStatus !: Boolean;
     status !: Status;
 }
 

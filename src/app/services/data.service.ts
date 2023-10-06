@@ -16,14 +16,14 @@ export class DataService {
 
   openSidebar:boolean=true;
 
-  getUsersByFilter(itemPerPage: number, pageNumber: number) : Observable<any>{
+  getUsersByFilter(itemPerPage: number, pageNumber: number, sort: string, sortBy: string, search: string, searchBy: string) : Observable<any>{
     const params = new HttpParams()
     .set("itemPerPage", itemPerPage.toString())
     .set("pageNumber", pageNumber.toString())
-    .set('sortOrder', 'asc')
-    .set('sortBy', 'id')
-    .set('search', '')
-    .set('searchBy', 'name');
+    .set('sortOrder', sort)
+    .set('sortBy', sortBy)
+    .set('search', search)
+    .set('searchBy', searchBy);
 
     return this.httpClient.get<any>(`${this.baseUrl}/users/by-filters`, {params});
   }
@@ -56,10 +56,10 @@ updateLeaveStatus(sav: Savel): Observable<any> {
   return this.httpClient.put(`${this.baseUrl}/update-leave-status/${sav.id}`, sav);
 }
 
-  changeStatusById(id: number, name: string) : Observable<any>{
+  changeStatusById(id: number, presenceStatus: Boolean) : Observable<any>{
     const params = new HttpParams()
     .set('id', id.toString())
-    .set('name', name);
+    .set('presenceStatus', presenceStatus.toString());
 
     return this.httpClient.put<any>(`${this.baseUrl}/change-status`, params);
   }

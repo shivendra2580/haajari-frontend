@@ -12,6 +12,7 @@
      </div>
     </div> -->
 
+
   <div class="topbar navbar-custom" style="position: fixed">
     <div class="container">
       <div class="row">
@@ -212,9 +213,7 @@
                                 aria-controls="collapseOne"
                                 [disabled]="companyForm.invalid"
                                 (click)="setActive(1)"
-                                (click)="register()"
-                                
-                              >
+                                (click)="register()"                              >
                                 Save
                               </button>
                             </div>
@@ -624,7 +623,7 @@
                   <div class="d-flex new-stap">
                     <div
                       class="tracing-icon"
-                      [ngClass]="{ active: activeModel > 0 }"
+                      [ngClass]="{ 'active': activeModel > 0 }"
                     >
                       <i class="bi bi-check2"></i>
                     </div>
@@ -642,7 +641,7 @@
                   <div class="d-flex align-items-center new-stap">
                     <div
                       class="tracing-icon"
-                      [ngClass]="{ active: activeModel > 1 }"
+                      [ngClass]="{ 'active': activeModel > 1 }"
                     >
                       <i class="bi bi-check2"></i>
                     </div>
@@ -660,7 +659,7 @@
                   <div class="d-flex new-stap">
                     <div
                       class="tracing-icon"
-                      [ngClass]="{ active: activeModel > 2 }"
+                      [ngClass]="{ 'active': activeModel > 2 }"
                     >
                       <i class="bi bi-check2"></i>
                     </div>
@@ -680,7 +679,7 @@
                     <div
                       class="tracing-icon"
                       [ngClass]="{
-                        active: activeModel > 3 || activeModel === 5
+                        'active': activeModel > 3 || activeModel == 5
                       }"
                     >
                       <i class="bi bi-check2"></i>
@@ -1035,17 +1034,21 @@
             Save
           </button>
         </div>
+        
       </form>
+
     </div>
   </div>
 </div>
+
 <div id="submitButton" class="">
   <button
     type="button"
     class="btn btn-primary"
-    [routerLink]="['']"
+    (click)="onBtnClick()"
   >
     Submit
   </button>
 </div>
+
 

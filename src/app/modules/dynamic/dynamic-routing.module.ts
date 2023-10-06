@@ -12,6 +12,8 @@ import { TaskManagerComponent } from './components/task-manager/task-manager.com
 import { TimetableComponent } from './components/timetable/timetable.component';
 import { UserlistComponent } from './components/userlist/userlist.component';
 import { DynamicComponent } from './dynamic.component';
+import { SlackAuthComponent } from './components/slack-auth/slack-auth.component';
+import { AddToSlackComponent } from './components/add-to-slack/add-to-slack.component';
 
 const routes: Routes = [
   { path: '', component: DynamicComponent },
@@ -25,7 +27,9 @@ const routes: Routes = [
   { path: 'onboarding', component: OnboardingComponent },
   { path: 'login', component: LoginComponent },
   { path: 'payment', component: PaymentComponent },
-  { path: 'userlist', component: UserlistComponent }
+  { path: 'userlist', component: UserlistComponent },
+  {path: 'slackauth', component: SlackAuthComponent },
+  {path: 'addtoslack', component: AddToSlackComponent }
   ];
 
 @NgModule({

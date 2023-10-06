@@ -16,6 +16,8 @@ import { PaymentComponent } from './components/payment/payment.component';
 import { UserlistComponent } from './components/userlist/userlist.component';
 import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { SlackAuthComponent } from './components/slack-auth/slack-auth.component';
+import { AddToSlackComponent } from './components/add-to-slack/add-to-slack.component';
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     OnboardingComponent,
     LoginComponent,
     PaymentComponent,
-    UserlistComponent
+    UserlistComponent,
+    SlackAuthComponent,
+    AddToSlackComponent
   ],
   imports: [
     DynamicRoutingModule,

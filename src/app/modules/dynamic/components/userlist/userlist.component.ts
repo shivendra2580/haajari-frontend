@@ -14,7 +14,8 @@ export class UserlistComponent implements OnInit {
   constructor(private dataService : DataService, private router : Router) { }
 
   users : Users[] = [];
-  itemPerPage : number = 6;
+  filteredUsers : Users[] = [];
+  itemPerPage : number = 5;
   pageNumber : number = 1;
   total !: number;
   rowNumber : number = 1;
@@ -24,7 +25,7 @@ export class UserlistComponent implements OnInit {
   }
 
   getUsersByFiltersFunction() {
-    this.dataService.getUsersByFilter(this.itemPerPage,this.pageNumber).subscribe((data : any) => {
+    this.dataService.getUsersByFilter(this.itemPerPage,this.pageNumber,'asc','id',this.searchText,'').subscribe((data : any) => {
       this.users = data.users;
       this.total = data.count;
       console.log(this.users);
@@ -34,8 +35,9 @@ export class UserlistComponent implements OnInit {
     })
   }
 
-  changeStatus(id: number, name : string){
-    this.dataService.changeStatusById(id,name).subscribe((data) =>{
+  text = '';
+  changeStatus(id: number, presenceStatus : Boolean){
+    this.dataService.changeStatusById(id,presenceStatus).subscribe(data =>{
       console.log(data);
       console.log("====================");
     }, (error) => {
@@ -44,6 +46,10 @@ export class UserlistComponent implements OnInit {
     })
   }
 
+
+  updateLeaveStatus(){
+
+  }
   
 
   onTableDataChange(event : any)
@@ -52,4 +58,11 @@ export class UserlistComponent implements OnInit {
     this.getUsersByFiltersFunction();
   }
 
+
+  searchText : string = '';
+
+
+  searchUsers() {
+    this.getUsersByFiltersFunction();
+  }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Savel } from 'src/app/models/savel';
 import { Organization } from 'src/app/models/users';
+import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class OnboardingComponent implements OnInit {
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService, private router: Router) { }
 
   ngOnInit(): void {
       this.getLeaves();
@@ -331,6 +332,11 @@ export class OnboardingComponent implements OnInit {
         alert("Error saving leave");
       }
     );
+  }
+
+  onBtnClick(){
+    // Navigate to /products page
+    this.router.navigate(['/dynamic/addtoslack']);
   }
 
   // setAct:any=this.setActive;
