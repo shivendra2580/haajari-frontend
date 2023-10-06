@@ -24,6 +24,16 @@
                 </div><!--end col-->
             </div>
             <!-- end page title end breadcrumb -->
+              
+
+            <form class="searching" role="search" (submit)="searchUsers()">
+                <div class="form-group">
+                  <input class="form-control me-2" type="search" id="searchText" placeholder="Search" (keyup)="searchUsers()" [(ngModel)]="searchText" [ngModelOptions]="{ standalone: true }">
+                </div>
+                <button class="btn btn-outline-success" type="submit">Search</button>
+              </form>
+
+
 
             <div class="row">
                 <div class="col-lg-12">
@@ -47,13 +57,21 @@
                                         <td>{{user.name}}</td>
                                         <td>{{user.slackUserId}}</td>
                                         <td>KRENAI</td>
-                                        <td>
-                                            <button id="sb" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">{{user.status.name}} <i class="mdi mdi-chevron-up"></i></button>
+                                        <!-- <td>
+                                            <button id="sb" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">ACTIVE<i class="mdi mdi-chevron-up"></i></button>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" (click)="changeStatus(user.id,'ACTIVE')">ACTIVE</a>
                                         <a class="dropdown-item" (click)="changeStatus(user.id,'INACTIVE')">INACTIVE</a>
                                     </div>
+                                        </td> -->
+
+                                        <td class="text-center">
+                                            <div class="">
+                                                <input type="checkbox" id="switch{{user.id}}" [(ngModel)]="user.presenceStatus" (change)="changeStatus(user.id, user.presenceStatus)" class="d-none"/>
+                                                <label for="switch{{user.id}}" class="hafday">Toggle</label>
+                                            </div>
                                         </td>
+                
                                     </tr>
 
                                     </tbody>
