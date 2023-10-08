@@ -117,3 +117,6 @@ span.first-name {
 .today-in{
     color: green;
 }
+#hide{
+    display: none;
+}

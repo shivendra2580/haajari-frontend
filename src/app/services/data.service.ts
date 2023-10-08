@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Users } from '../models/users';
 import { Time } from '@angular/common';
 import { Savel } from '../models/savel';
+import { AttendenceDto } from '../models/attendence-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -58,6 +59,13 @@ updateLeaveStatus(sav: Savel): Observable<any> {
     .set('presenceStatus', presenceStatus.toString());
 
     return this.httpClient.put<any>(`${this.baseUrl}/change-status`, params);
+  }
+
+  getDurationDetails(startDateStr : string, endDateStr : string) : Observable<Record<string,AttendenceDto[]>>{
+    const params = new HttpParams()
+    .set('startDateStr', startDateStr)
+    .set('endDateStr', endDateStr)
+    return this.httpClient.get<any>(`${this.baseUrl}/testingg`,{params});
   }
 
 }

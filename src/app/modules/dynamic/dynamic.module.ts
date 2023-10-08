@@ -18,7 +18,10 @@ import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SlackAuthComponent } from './components/slack-auth/slack-auth.component';
 import { AddToSlackComponent } from './components/add-to-slack/add-to-slack.component';
-
+import {NgxDaterangepickerMd} from 'ngx-daterangepicker-material';
+import { DateFormatPipe } from './date-format.pipe';
+import { TimeFormatPipe } from './time-format.pipe';
+import { DurationFormatPipe } from './duration-format.pipe';
 
 @NgModule({
   declarations: [
@@ -35,13 +38,17 @@ import { AddToSlackComponent } from './components/add-to-slack/add-to-slack.comp
     PaymentComponent,
     UserlistComponent,
     SlackAuthComponent,
-    AddToSlackComponent
+    AddToSlackComponent,
+    DateFormatPipe,
+    TimeFormatPipe,
+    DurationFormatPipe
   ],
   imports: [
     DynamicRoutingModule,
     CommonModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgxDaterangepickerMd.forRoot()
   ]
 })
 export class DynamicModule { }

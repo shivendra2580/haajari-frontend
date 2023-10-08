@@ -35,6 +35,18 @@
 
         <div class=" d-flex align-items-center justify-content-end">
             <div class="filter">
+                <input class="form-control col-md-3"
+                        type="text"
+                        id="dateRange"
+                        autocomplete="off"
+                        class="form-control"
+                        ngxDaterangepickerMd
+                        [locale]="{ applyLabel: 'Apply', format: 'DD-MM-YYYY' }"
+                        [(ngModel)]="selected"
+                        name="daterange"
+                        (ngModelChange)="dateRangeFilter($event)"
+                        placeholder="Select date range"
+                        /> 
                 <div>
                     <select class="form-control" id="idDiscount" data-choices="" data-choices-search-false="" data-choices-removeitem="">
                         <option>Project Wise Attendance</option>
@@ -110,136 +122,15 @@
 
                     <table class="table table-bordered time-table-list">
                         <thead>
-                          <tr>
+                          <tr  *ngFor="let entry of myAttendanceData | keyvalue">
                             <th scope="col" class="css-8mp9q7">
                                 <h5>Date</h5>
                             </th>
-                            <th scope="col" class="css-4jt3ln">
-                                <h5>1 August</h5>
-                                <p class="mb-0">Monday</p>
-                            </th>
-                            <th scope="col" class="css-4jt3ln">
-                                <h5>2 August</h5>
-                                <p class="mb-0">Monday</p>
-                            </th>
-                            <th scope="col" class="css-4jt3ln">
-                                <h5>3 August</h5>
-                                <p class="mb-0">Monday</p>
-                            </th>
-                            <th scope="col" class="css-4jt3ln">
-                                <h5>4 August</h5>
-                                <p class="mb-0">Monday</p>
-                            </th>
-                            <th scope="col" class="css-4jt3ln">
-                                <h5>5 August</h5>
-                                <p class="mb-0">Monday</p>
-                            </th>
-                            <th scope="col" class="css-4jt3ln">
-                                <h5>6 August</h5>
-                                <p class="mb-0">Monday</p>
-                            </th>
-                            <th scope="col" class="css-4jt3ln">
-                                <h5>7 August</h5>
-                                <p class="mb-0">Monday</p>
+                            <th scope="col" class="css-4jt3ln"  *ngFor="let attendance of entry.value">
+                                <h5>{{attendance.createdDate | dateFormat}}</h5>
+                                <p class="mb-0">{{attendance.createdDay}}</p>
                             </th>
                             
-                            <th scope="col" class="css-4jt3ln">
-                                <h5>8 August</h5>
-                                <p class="mb-0">Monday</p>
-                            </th>
-                            <th scope="col" class="css-4jt3ln">
-                                <h5>9 August</h5>
-                                <p class="mb-0">Monday</p>
-                            </th>
-                           
-                            <th scope="col" class="css-4jt3ln">
-                                <h5>10 August</h5>
-                                <p class="mb-0">Monday</p>
-                            </th>
-                            <th scope="col" class="css-4jt3ln">
-                                <h5>11 August</h5>
-                                <p class="mb-0">Monday</p>
-                            </th>
-                            <th scope="col" class="css-4jt3ln">
-                                <h5>12 August</h5>
-                                <p class="mb-0">Monday</p>
-                            </th>
-                            <th scope="col" class="css-4jt3ln">
-                                <h5>13 August</h5>
-                                <p class="mb-0">Monday</p>
-                            </th>
-                            <th scope="col" class="css-4jt3ln">
-                                <h5>14 August</h5>
-                                <p class="mb-0">Monday</p>
-                            </th>
-                            <th scope="col" class="css-4jt3ln">
-                                <h5>15 August</h5>
-                                <p class="mb-0">Monday</p>
-                            </th>
-                            <th scope="col" class="css-4jt3ln">
-                                <h5>14 August</h5>
-                                <p class="mb-0">Monday</p>
-                            </th>
-                            <th scope="col" class="css-4jt3ln">
-                                <h5>16 August</h5>
-                                <p class="mb-0">Monday</p>
-                            </th>
-                            <th scope="col" class="css-4jt3ln">
-                                <h5>17 August</h5>
-                                <p class="mb-0">Monday</p>
-                            </th>
-                            <th scope="col" class="css-4jt3ln">
-                                <h5>18 August</h5>
-                                <p class="mb-0">Monday</p>
-                            </th>
-                            <th scope="col" class="css-4jt3ln">
-                                <h5>19 August</h5>
-                                <p class="mb-0">Monday</p>
-                            </th>
-                            <th scope="col" class="css-4jt3ln">
-                                <h5>20 August</h5>
-                                <p class="mb-0">Monday</p>
-                            </th>
-                            <th scope="col" class="css-4jt3ln">
-                                <h5>21 August</h5>
-                                <p class="mb-0">Monday</p>
-                            </th>
-                            <th scope="col" class="css-4jt3ln">
-                                <h5>22 August</h5>
-                                <p class="mb-0">Monday</p>
-                            </th>
-                            <th scope="col" class="css-4jt3ln">
-                                <h5>23 August</h5>
-                                <p class="mb-0">Monday</p>
-                            </th>
-                            <th scope="col" class="css-4jt3ln">
-                                <h5>24 August</h5>
-                                <p class="mb-0">Monday</p>
-                            </th>
-                            <th scope="col" class="css-4jt3ln">
-                                <h5>25 August</h5>
-                                <p class="mb-0">Monday</p>
-                            </th>
-                            <th scope="col" class="css-4jt3ln">
-                                <h5>26 August</h5>
-                                <p class="mb-0">Monday</p>
-                            </th>
-                            <th scope="col" class="css-4jt3ln">
-                                <h5>27 August</h5>
-                                <p class="mb-0">Monday</p>
-                            </th>
-                            <th scope="col" class="css-4jt3ln">
-                                <h5>28 August</h5>
-                                <p class="mb-0">Monday</p>
-                            </th>
-                            <th scope="col" class="css-4jt3ln">
-                                <h5>29 August</h5>
-                                <p class="mb-0">Monday</p>
-                            </th>
-                            <th scope="col" class="css-4jt3ln">
-                                <h5>30 August</h5>
-                                <p class="mb-0">Monday</p>
-                            </th>
                             <th scope="col" class="css-1j0jct9">
                                 <div class="border-left">
                                 <h5>Total</h5>
@@ -249,167 +140,27 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
+                          <tr *ngFor="let entry of myAttendanceData | keyvalue">
                             <th scope="row" class="css-8mp9q7">
                                 <div >
                                     <h5 class="d-flex align-items-center justify-content-center" style="gap:10px;"> 
-                                        <span class="first-name">Y</span> 
-                                        <span>Yogesh Kumar</span>
+                                        <span class="first-name">{{ entry.key[0] }}</span>
+                                        <span>{{ entry.key }}</span>
                                     </h5>
                                 </div>
                             </th>
-                            <td>
-                                <p><i class="bi bi-box-arrow-in-right mr-2 today-in"></i> 09:55 AM</p>
-                                <p><i class="bi bi-box-arrow-left mr-2"></i> 07:55 AM</p>
-                                <p><i class="bi bi-stopwatch mr-2"></i> 8h 53m</p>
-                            </td>
-                            <td>
-                                <p><i class="bi bi-calendar-check-fill absent"></i> Absent</p>
-                            </td>
-                            <td>
-                                <p><i class="bi bi-calendar-check-fill absent"></i> Absent</p>
-                            </td>
-                            <td>
-                                <p><i class="bi bi-box-arrow-in-right mr-2 today-in"></i> 09:55 AM</p>
-                                <p><i class="bi bi-box-arrow-left mr-2"></i> 07:55 AM</p>
-                                <p><i class="bi bi-stopwatch mr-2"></i> 8h 53m</p>
-                            </td>
-                            <td>
-                                <p><i class="bi bi-box-arrow-in-right mr-2 today-in"></i> 09:55 AM</p>
-                                <p><i class="bi bi-box-arrow-left mr-2"></i> 07:55 AM</p>
-                                <p><i class="bi bi-stopwatch mr-2"></i> 8h 53m</p>
-                            </td>
-                            <td>
-                                <p><i class="bi bi-calendar-check-fill absent"></i> Absent</p>
-                            </td>
-                            <td>
-                                <p><i class="bi bi-box-arrow-in-right mr-2 today-in"></i> 09:55 AM</p>
-                                <p><i class="bi bi-box-arrow-left mr-2"></i> 07:55 AM</p>
-                                <p><i class="bi bi-stopwatch mr-2"></i> 8h 53m</p>
-                            </td>
-                            <td>
-                                <p><i class="bi bi-box-arrow-in-right mr-2 today-in"></i> 09:55 AM</p>
-                                <p><i class="bi bi-box-arrow-left mr-2"></i> 07:55 AM</p>
-                                <p><i class="bi bi-stopwatch mr-2"></i> 8h 53m</p>
-                            </td>
-                            <td>
-                                <p><i class="bi bi-box-arrow-in-right mr-2 today-in"></i> 09:55 AM</p>
-                                <p><i class="bi bi-box-arrow-left mr-2"></i> 07:55 AM</p>
-                                <p><i class="bi bi-stopwatch mr-2"></i> 8h 53m</p>
-                            </td>
-                            <td>
-                                <p><i class="bi bi-calendar-check-fill absent"></i> Absent</p>
-                            </td>
-                            <td>
-                                <p><i class="bi bi-box-arrow-in-right mr-2 today-in"></i> 09:55 AM</p>
-                                <p><i class="bi bi-box-arrow-left mr-2"></i> 07:55 AM</p>
-                                <p><i class="bi bi-stopwatch mr-2"></i> 8h 53m</p>
-                            </td>
-                            <td>
-                                <p><i class="bi bi-box-arrow-in-right mr-2 today-in"></i> 09:55 AM</p>
-                                <p><i class="bi bi-box-arrow-left mr-2"></i> 07:55 AM</p>
-                                <p><i class="bi bi-stopwatch mr-2"></i> 8h 53m</p>
-                            </td>
-                            <td>
-                                <p><i class="bi bi-box-arrow-in-right mr-2 today-in"></i> 09:55 AM</p>
-                                <p><i class="bi bi-box-arrow-left mr-2"></i> 07:55 AM</p>
-                                <p><i class="bi bi-stopwatch mr-2"></i> 8h 53m</p>
-                            </td>
-                            <td>
-                                <p><i class="bi bi-calendar-check-fill absent"></i> Absent</p>
-                            </td>
-                            <td>
-                                <p><i class="bi bi-box-arrow-in-right mr-2 today-in"></i> 09:55 AM</p>
-                                <p><i class="bi bi-box-arrow-left mr-2"></i> 07:55 AM</p>
-                                <p><i class="bi bi-stopwatch mr-2"></i> 8h 53m</p>
-                            </td>
-                            <td>
-                                <p><i class="bi bi-box-arrow-in-right mr-2 today-in"></i> 09:55 AM</p>
-                                <p><i class="bi bi-box-arrow-left mr-2"></i> 07:55 AM</p>
-                                <p><i class="bi bi-stopwatch mr-2"></i> 8h 53m</p>
-                            </td>
-
-                            <td>
-                                <p><i class="bi bi-box-arrow-in-right mr-2 today-in"></i> 09:55 AM</p>
-                                <p><i class="bi bi-box-arrow-left mr-2"></i> 07:55 AM</p>
-                                <p><i class="bi bi-stopwatch mr-2"></i> 8h 53m</p>
-                            </td>
-                            <td>
-                                <p><i class="bi bi-box-arrow-in-right mr-2 today-in"></i> 09:55 AM</p>
-                                <p><i class="bi bi-box-arrow-left mr-2"></i> 07:55 AM</p>
-                                <p><i class="bi bi-stopwatch mr-2"></i> 8h 53m</p>
-                            </td>
-                           
-                            <td>
-                                <p><i class="bi bi-box-arrow-in-right mr-2 today-in"></i> 09:55 AM</p>
-                                <p><i class="bi bi-box-arrow-left mr-2"></i> 07:55 AM</p>
-                                <p><i class="bi bi-stopwatch mr-2"></i> 8h 53m</p>
-                            </td>
-                            <td>
-                                <p><i class="bi bi-box-arrow-in-right mr-2 today-in"></i> 09:55 AM</p>
-                                <p><i class="bi bi-box-arrow-left mr-2"></i> 07:55 AM</p>
-                                <p><i class="bi bi-stopwatch mr-2"></i> 8h 53m</p>
-                            </td>
-                            <td>
-                                <p><i class="bi bi-box-arrow-in-right mr-2 today-in"></i> 09:55 AM</p>
-                                <p><i class="bi bi-box-arrow-left mr-2"></i> 07:55 AM</p>
-                                <p><i class="bi bi-stopwatch mr-2"></i> 8h 53m</p>
-                            </td>
-                            <td>
-                                <p><i class="bi bi-box-arrow-in-right mr-2 today-in"></i> 09:55 AM</p>
-                                <p><i class="bi bi-box-arrow-left mr-2"></i> 07:55 AM</p>
-                                <p><i class="bi bi-stopwatch mr-2"></i> 8h 53m</p>
-                            </td>
-                            <td>
-                                <p><i class="bi bi-box-arrow-in-right mr-2 today-in"></i> 09:55 AM</p>
-                                <p><i class="bi bi-box-arrow-left mr-2"></i> 07:55 AM</p>
-                                <p><i class="bi bi-stopwatch mr-2"></i> 8h 53m</p>
-                            </td>
-                            <td>
-                                <p><i class="bi bi-box-arrow-in-right mr-2 today-in"></i> 09:55 AM</p>
-                                <p><i class="bi bi-box-arrow-left mr-2"></i> 07:55 AM</p>
-                                <p><i class="bi bi-stopwatch mr-2"></i> 8h 53m</p>
-                            </td>
-                            <td>
-                                <p><i class="bi bi-box-arrow-in-right mr-2 today-in"></i> 09:55 AM</p>
-                                <p><i class="bi bi-box-arrow-left mr-2"></i> 07:55 AM</p>
-                                <p><i class="bi bi-stopwatch mr-2"></i> 8h 53m</p>
-                            </td>
-                            <td>
-                                <p><i class="bi bi-box-arrow-in-right mr-2 today-in"></i> 09:55 AM</p>
-                                <p><i class="bi bi-box-arrow-left mr-2"></i> 07:55 AM</p>
-                                <p><i class="bi bi-stopwatch mr-2"></i> 8h 53m</p>
-                            </td>
-                            <td>
-                                <p><i class="bi bi-box-arrow-in-right mr-2 today-in"></i> 09:55 AM</p>
-                                <p><i class="bi bi-box-arrow-left mr-2"></i> 07:55 AM</p>
-                                <p><i class="bi bi-stopwatch mr-2"></i> 8h 53m</p>
-                            </td>
-                            <td>
-                                <p><i class="bi bi-box-arrow-in-right mr-2 today-in"></i> 09:55 AM</p>
-                                <p><i class="bi bi-box-arrow-left mr-2"></i> 07:55 AM</p>
-                                <p><i class="bi bi-stopwatch mr-2"></i> 8h 53m</p>
-                            </td>
-                           
-                            <td>
-                                <p><i class="bi bi-box-arrow-in-right mr-2 today-in"></i> 09:55 AM</p>
-                                <p><i class="bi bi-box-arrow-left mr-2"></i> 07:55 AM</p>
-                                <p><i class="bi bi-stopwatch mr-2"></i> 8h 53m</p>
-                            </td>
-                            <td>
-                                <p><i class="bi bi-box-arrow-in-right mr-2 today-in"></i> 09:55 AM</p>
-                                <p><i class="bi bi-box-arrow-left mr-2"></i> 07:55 AM</p>
-                                <p><i class="bi bi-stopwatch mr-2"></i> 8h 53m</p>
-                            </td>
-                            <td>
-                                <p><i class="bi bi-box-arrow-in-right mr-2 today-in"></i> 09:55 AM</p>
-                                <p><i class="bi bi-box-arrow-left mr-2"></i> 07:55 AM</p>
-                                <p><i class="bi bi-stopwatch mr-2"></i> 8h 53m</p>
-                            </td>
-                            <td class="css-odmd51">
-                                <p><i class="bi bi-stopwatch mr-2"></i> 8h 53m</p>
-                                <p><i class="bi bi-calendar-event"></i> 5</p>
-                            </td>
+                            <td *ngFor="let attendance of entry.value">
+                                <div *ngIf="attendance.checkInTime !== null">
+                                  <p><i class="bi bi-box-arrow-in-right mr-2 today-in"></i> {{ attendance.checkInTime | timeFormat}}</p>
+                                  <p><i class="bi bi-box-arrow-left mr-2"></i> {{ attendance.checkOutTime | timeFormat}}</p>
+                                  <p><i class="bi bi-stopwatch mr-2"></i> {{ attendance.duration | durationFormat }}</p>
+                                </div>
+                                <div *ngIf="attendance.checkInTime === null">
+                                  <p><i class="bi bi-calendar-check-fill absent"></i> Absent</p>
+                                </div>
+                              </td>
+                              
+                            
                           </tr>
                          
                          
