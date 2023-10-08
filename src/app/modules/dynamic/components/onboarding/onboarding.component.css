@@ -343,4 +343,20 @@ textarea.form-control {
 
 #xyz{
   display: none;
+
 }
+#abc{
+  /* display: block; */
+  text-align: center;
+  font-weight: bold;
+}
+#def{
+   display: none;
+  text-align: center;
+  font-weight: bold;
+}
+#submitButton{
+  text-align: left;
+  margin-left: 5%;
+}
+

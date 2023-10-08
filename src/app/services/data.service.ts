@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Users } from '../models/users';
+import { Organization, Users } from '../models/users';
 import { Time } from '@angular/common';
 import { Savel } from '../models/savel';
 import { AttendenceDto } from '../models/attendence-dto';
@@ -30,11 +30,15 @@ export class DataService {
   }
 
 
-  registerOnboardingDetails(name: string, state: string, country: string, organizationPic: File | null){
+  registerOnboardingDetails(name: string, state: string, country: string, organizationPic: File | null, flagOrganization: boolean, flagShiftTimings: boolean, flagQuestions: boolean, flagLeave: boolean){
     const params = new HttpParams()
       .set('name', name)
       .set('state', state)
       .set('country', country)
+      .set('flagOrganization', flagOrganization)
+      .set('flagShiftTimings', flagShiftTimings)
+      .set('flagQuestions', flagQuestions)
+      .set('flagLeave', flagLeave)
 
     const url = `http://localhost:8080/api/v1/attendance/registerOrg?${params.toString()}`;
 
@@ -67,6 +71,14 @@ updateLeaveStatus(sav: Savel): Observable<any> {
     .set('endDateStr', endDateStr)
     return this.httpClient.get<any>(`${this.baseUrl}/testingg`,{params});
   }
+
+  saveShiftTimings(shiftTimingsData: any): Observable<any> {
+    return this.httpClient.post(`${this.baseUrl}/save-shiftTimings`, shiftTimingsData);
+  }
+
+  // updateOrganizationFlag(organization: Organization): Observable<any> {
+  //   return this.httpClient.put(`${this.baseUrl}/update-organization/${organization.id}`, organization);
+  // }
 
 }
 

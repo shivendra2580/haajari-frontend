@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Savel } from 'src/app/models/savel';
+import { Organization } from 'src/app/models/users';
+import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -9,17 +11,20 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class OnboardingComponent implements OnInit {
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService, private router: Router) { }
 
   ngOnInit(): void {
       this.getLeaves();
-  
   }
 
   name: string = "";
   state: string = 'Select State';
   country: string = 'Select Country';
   organizationPic: File | null = null;
+  flagOrganization= false;
+  flagShiftTimings= false;
+  flagQuestions = false;
+  flagLeave= false;
 
   states: string[] = []; 
 
@@ -39,10 +44,6 @@ export class OnboardingComponent implements OnInit {
     {
       name: 'United States',
       states: ['California', 'New York', 'Texas']
-    },
-    {
-      name: 'India',
-      states: ['Maharashtra', 'Tamil Nadu', 'Uttar Pradesh']
     },
     {
       name: 'Germany',
@@ -119,22 +120,46 @@ export class OnboardingComponent implements OnInit {
     }
     this.state = 'Select State'; 
   }
-
+ 
+  
+  resetForm2() {
+    this.name= '';
+    this.state = '';
+    this.country = '';
+    this.organizationPic = null;
+  }
+ // @ViewChild('myForm', {static: false}) myForm:any= NgForm;
 
   register() {
-    this.dataService.registerOnboardingDetails(this.name, this.state, this.country, this.organizationPic).subscribe((resultData: any) => {
+    this.dataService.registerOnboardingDetails(this.name, this.state, this.country, this.organizationPic, this.flagOrganization, this.flagShiftTimings, this.flagQuestions, this.flagLeave).subscribe((resultData: any) => {
       console.log(resultData);
       alert("Organization Registered successfully");
+      this.resetForm2();
+      // const res=document.getElementById("collapseOne") as HTMLElement | null;
+      // if(res){
+      //   res!.style.display="none";
+      // }
+      //this.resetForm1();
+      //window.location.reload();
     });
   }
 
-  loginArray: any = {
-    inTime: '',
-    outTime: '',
-    startLunch: '',
-    endLunch: '',
-    workingHour: '',
-    totalHour: '',
+  loginArray: {
+    inTime: string,
+    outTime: string,
+    startLunch: string,
+    endLunch: string,
+    workingHour: string,
+    totalHour: string,
+    // flagShiftTimings: any,
+  } = {
+    inTime: "",
+    outTime: "",
+    startLunch: "",
+    endLunch: "",
+    workingHour: "",
+    totalHour: "",
+    // flagShiftTimings: true,
   };
   
   calculateHours() {
@@ -179,7 +204,23 @@ export class OnboardingComponent implements OnInit {
   addShift() {
     this.calculateHours();
     console.log(this.loginArray);
+    const result2=document.getElementById("abc") as HTMLElement | null;
+     if(result2){
+       result2.style.display="none";
+     }
     alert("Shift Time updated");
+
+    const result=document.getElementById("xyz") as HTMLElement | null;
+     if(result){
+      result.style.display="block";
+     }
+    //  const result3=document.getElementById("shifttime") as HTMLElement | null;
+    //  if(result3){
+    //   result3.style.display="none";
+    //  }
+
+     
+    
   }
   
 
@@ -189,11 +230,24 @@ export class OnboardingComponent implements OnInit {
     leaveStatus: ''
   };
 
+  resetForm() {
+    this.leaveData = {
+      leaveType: '',
+      leaveEntitled: '',
+      leaveStatus: ''
+    };
+  }
+
   onSubmit() {
     this.dataService.saveLeave(this.leaveData).subscribe(
       (response) => {
         console.log(response);
         alert("Leave saved successfully");
+        this.savel.push(response);
+        this.resetForm();
+        
+       // window.location.reload();
+       //this.leaveData = {};
 
       },
       (error) => {
@@ -223,4 +277,77 @@ export class OnboardingComponent implements OnInit {
       console.log(error);
     });
   }
+
+
+
+
+  // org: Organization[] = [];
+
+  // updateOrganizationFlag(organization: Organization) {
+  //   this.dataService.updateOrganizationFlag(organization).subscribe(() => {
+  //     console.log(`flag updated for ${this.org.fla}`);
+    
+  //   }, (error) => {
+  //     console.log(error);
+  //   });
+  // }
+
+
+  currentDate = new Date();
+
+  activeModel:number=0;
+  setActive(activeNumber:number){
+    this.activeModel = activeNumber;
+    console.log(this.activeModel);
+  }
+
+  resetForm3() {
+    this.loginArray = {
+      inTime: "",
+      outTime: "",
+      startLunch: "",
+      endLunch: "",
+      workingHour: "",
+      totalHour: "",
+    };
+  }
+  onSaveShiftTimings() {
+    this.dataService.saveShiftTimings(this.loginArray).subscribe(
+      (response) => {
+        console.log(response);
+        alert("Leave saved successfully");
+        this.resetForm3();
+        const result4=document.getElementById("xyz") as HTMLElement | null;
+        if(result4){
+          result4.style.display="none";
+         }
+
+         const result5=document.getElementById("def") as HTMLElement | null;
+        if(result5){
+          result5.style.display="block";
+         }
+      },
+      (error) => {
+        console.error(error);
+        alert("Error saving leave");
+      }
+    );
+  }
+
+  onBtnClick(){
+    // Navigate to /products page
+    this.router.navigate(['/dynamic/addtoslack']);
+  }
+
+  // setAct:any=this.setActive;
+
+  // setActive2(){
+  //   if(this.setAct%2==0){
+  //      this.settracingicon='active';
+  //   }else{
+  //      this.
+  //   }
+
+  // }
+
 }
