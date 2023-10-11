@@ -59,7 +59,7 @@ export class OnboardingComponent implements OnInit {
   flagLeave= false;
   states: string[] = []; 
   organization !: Organization;
-  orgId: any;
+  orgI: any;
 
   countries = [
     {
@@ -165,6 +165,7 @@ export class OnboardingComponent implements OnInit {
  
 
   register() {
+    debugger
     if (this.businessInfoForm.valid) {
     this.dataService.registerOnboardingDetails(this.name, this.state, this.country, this.organizationPic).subscribe((resultData: any) => {
       console.log(resultData);
@@ -173,8 +174,9 @@ export class OnboardingComponent implements OnInit {
 
      // alert("Organization Registered successfully, Please Click on Shift Timings");
       this.resetForm2();
-      this.orgId = this.organization.id;
-      localStorage.setItem('orgId', this.orgId);
+      // this.orgI = this.organization.id;
+      this.orgI = resultData.id;
+      localStorage.setItem('orgId', this.orgI);
       //window.location.reload();
     });
     }
