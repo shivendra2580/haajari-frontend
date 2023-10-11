@@ -30,15 +30,11 @@ export class DataService {
   }
 
 
-  registerOnboardingDetails(name: string, state: string, country: string, organizationPic: File | null, flagOrganization: boolean, flagShiftTimings: boolean, flagQuestions: boolean, flagLeave: boolean){
+  registerOnboardingDetails(name: string, state: string, country: string, organizationPic: File | null){
     const params = new HttpParams()
       .set('name', name)
       .set('state', state)
       .set('country', country)
-      .set('flagOrganization', flagOrganization)
-      .set('flagShiftTimings', flagShiftTimings)
-      .set('flagQuestions', flagQuestions)
-      .set('flagLeave', flagLeave)
 
     const url = `http://localhost:8080/api/v1/attendance/registerOrg?${params.toString()}`;
 
@@ -75,10 +71,6 @@ updateLeaveStatus(sav: Savel): Observable<any> {
   saveShiftTimings(shiftTimingsData: any): Observable<any> {
     return this.httpClient.post(`${this.baseUrl}/save-shiftTimings`, shiftTimingsData);
   }
-
-  // updateOrganizationFlag(organization: Organization): Observable<any> {
-  //   return this.httpClient.put(`${this.baseUrl}/update-organization/${organization.id}`, organization);
-  // }
 
 }
 
