@@ -1,20 +1,47 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { EventEmitter, Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Organization, Users } from '../models/users';
 import { Time } from '@angular/common';
 import { Savel } from '../models/savel';
 import { AttendenceDto } from '../models/attendence-dto';
+import { OnboardingComponent } from '../modules/dynamic/components/onboarding/onboarding.component';
+import { SlackAuthComponent } from '../modules/dynamic/components/slack-auth/slack-auth.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
+  // id !: number;
+   
+  orgId: any;
+  constructor(private httpClient: HttpClient) { 
+    
+  }
+  // private refId = new BehaviorSubject<number | null>(null);;
 
-  constructor(private httpClient: HttpClient) { }
+  // setRefId(num: number) {
+  //   console.log('Setting organization ID:', num);
+  //   this.refId.next(num);
+  // }
+
+  // getRefId(): Observable<number | null> {
+  //   return this.refId.asObservable();
+  // }
+
+  private orgIdEmitter = new EventEmitter<number>();
+
+  setOrgId(orgId: number) {
+    this.orgIdEmitter.emit(orgId);
+  }
+
+  getOrgIdEmitter(): EventEmitter<number> {
+    return this.orgIdEmitter;
+  }
 
   private baseUrl = "http://localhost:8080/api/v1/attendance";
 
+  
   openSidebar:boolean=true;
 
   getUsersByFilter(itemPerPage: number, pageNumber: number, sort: string, sortBy: string, search: string, searchBy: string) : Observable<any>{
@@ -72,6 +99,21 @@ updateLeaveStatus(sav: Savel): Observable<any> {
     return this.httpClient.post(`${this.baseUrl}/save-shiftTimings`, shiftTimingsData);
   }
 
+  // updateOrganizationFlag(organization: Organization): Observable<any> {
+  //   return this.httpClient.put(`${this.baseUrl}/update-organization/${organization.id}`, organization);
+  // }
+
+ 
+  saveTokenForOrganization(token: string, organizationId: any): Observable<any> {
+    const params = new HttpParams()
+    .set('token', token)
+    .set('organizationId',organizationId)
+    
+
+    const url = `${this.baseUrl}/savetoken`;
+
+    return this.httpClient.put(url, {params});
+  }
 }
 
 

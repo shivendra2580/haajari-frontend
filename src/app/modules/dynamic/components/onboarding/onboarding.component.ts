@@ -1,15 +1,17 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+
+import { Component, OnInit, Output, ViewChild, EventEmitter, ElementRef } from '@angular/core';
 import { Savel } from 'src/app/models/savel';
 import { Organization } from 'src/app/models/users';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+
 
 @Component({
   selector: 'app-onboarding',
   templateUrl: './onboarding.component.html',
-  styleUrls: ['./onboarding.component.css']
+  styleUrls: ['./onboarding.component.css'],
 })
 export class OnboardingComponent implements OnInit {
 
@@ -39,6 +41,7 @@ export class OnboardingComponent implements OnInit {
       //   leaveStatus: ['', Validators.required]
       // });  
   }
+  // constructor(private dataService: DataService, private router: Router, private httpClient : HttpClient) { }
 
   ngOnInit(): void {
       this.getLeaves();
@@ -50,7 +53,13 @@ export class OnboardingComponent implements OnInit {
   country: string = '';
   organizationPic: File | null = null;
 
+  flagOrganization= false;
+  flagShiftTimings= false;
+  flagQuestions = false;
+  flagLeave= false;
   states: string[] = []; 
+  organization !: Organization;
+  orgId: any;
 
   countries = [
     {
@@ -164,10 +173,29 @@ export class OnboardingComponent implements OnInit {
 
      // alert("Organization Registered successfully, Please Click on Shift Timings");
       this.resetForm2();
+      this.orgId = this.organization.id;
+      localStorage.setItem('orgId', this.orgId);
       //window.location.reload();
     });
     }
+ // @ViewChild('myForm', {static: false}) myForm:any= NgForm;
+  // register() {
+  //   debugger
+  //   this.dataService.registerOnboardingDetails(this.name, this.state, this.country, this.organizationPic, this.flagOrganization, this.flagShiftTimings, this.flagQuestions, this.flagLeave).subscribe((resultData: any) => {
+  //     this.organization = resultData;
+  //     console.log(this.organization);
+  //     alert("Organization Registered successfully");
+  //     this.resetForm2();
+  //     this.orgId = this.organization.id;
+  //     console.log(this.orgId);
+  //     // this.dataService.setOrgId(this.orgId);
+  //     // this.dataService.orgId = this.orgId;
+  //     localStorage.setItem('orgId', this.orgId);
+  //   });
+    
   }
+
+ 
 
   loginArray: {
     inTime: string,
@@ -244,6 +272,7 @@ export class OnboardingComponent implements OnInit {
      }
     }
     
+   
   }
   
   
@@ -405,6 +434,8 @@ export class OnboardingComponent implements OnInit {
   setLockbusinessInfoCompleted() {
     this.lockbusinessInfoCompleted = false;
   }
+
+  
 
   
 
