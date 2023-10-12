@@ -10,7 +10,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -27,8 +26,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgxPaginationModule,
     NgxDaterangepickerMd.forRoot(),
     ReactiveFormsModule,
-    NgxPaginationModule,
-    NgbModule
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]
