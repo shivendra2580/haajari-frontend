@@ -23,6 +23,8 @@ export class OnboardingComponent implements OnInit {
   constructor(private dataService: DataService, private router: Router, private fb: FormBuilder ) { 
       this.businessInfoForm = this.fb.group({
         name: ['', Validators.required],
+        email: ['', [Validators.required,Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(5)]],
         country: ['', Validators.required],
         state: ['', Validators.required],
         organizationPic: [null, Validators.required],
@@ -44,19 +46,17 @@ export class OnboardingComponent implements OnInit {
   // constructor(private dataService: DataService, private router: Router, private httpClient : HttpClient) { }
 
   ngOnInit(): void {
-      this.getLeaves();
+     // this.getLeaves();
   }
 
 
   name: string = "";
+  email: string= "";
+  password: string="";
   state: string = '';
   country: string = '';
   organizationPic: File | null = null;
 
-  flagOrganization= false;
-  flagShiftTimings= false;
-  flagQuestions = false;
-  flagLeave= false;
   states: string[] = []; 
   organization !: Organization;
   orgI: any;
@@ -152,12 +152,14 @@ export class OnboardingComponent implements OnInit {
     } else {
       this.states = [];
     }
-    this.state = 'Select State'; 
+   // this.state = 'Select State'; 
   }
  
   
   resetForm2() {
     this.name= '';
+    this.email= '';
+    this.password= '';
     this.state = '';
     this.country = '';
     this.organizationPic = null;
@@ -165,15 +167,13 @@ export class OnboardingComponent implements OnInit {
  
 
   register() {
-    debugger
     if (this.businessInfoForm.valid) {
-    this.dataService.registerOnboardingDetails(this.name, this.state, this.country, this.organizationPic).subscribe((resultData: any) => {
+    this.dataService.registerOnboardingDetails(this.name, this.email, this.password, this.state, this.country, this.organizationPic).subscribe((resultData: any) => {
       console.log(resultData);
      this.loginArray.organizationId=resultData.id;
      this.leaveData.orgId=resultData.id;
-
-     // alert("Organization Registered successfully, Please Click on Shift Timings");
-      this.resetForm2();
+     alert("Organization Registered successfully, Please Click on Shift Timings");
+     // this.resetForm2();
       // this.orgI = this.organization.id;
       this.orgI = resultData.id;
       localStorage.setItem('orgId', this.orgI);

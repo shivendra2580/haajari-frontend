@@ -104,7 +104,7 @@
                     >
                     <!-- #companyForm="ngForm" name="myForm" novalidate  -->
                       <div class="accordion-body">
-                        <form [formGroup]="businessInfoForm" (ngSubmit)="register()"
+                        <form [formGroup]="businessInfoForm"
                         >
                           <div class="row">
                             <div class="col-md-6">
@@ -126,6 +126,51 @@
                                 />
                                 <div *ngIf="businessInfoForm.get('name')?.hasError('required') && businessInfoForm.get('name')?.touched" class="text-danger">
                                   Company Name is required!
+                                </div>
+                              </div>
+                            </div>
+                            <!-- ####################### -->
+                            <div class="col-md-6">
+                              <div class="mb-3">
+                                <label
+                                  for="useremail"
+                                  style="padding-bottom: 6px"
+                                  >Email</label
+                                >
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  id="useremail"
+                                  placeholder="Enter email..."
+                                  name="useremail"
+                                  [(ngModel)]="email"
+                                  formControlName="email"
+                                  
+                                />
+                                <div *ngIf="businessInfoForm.get('email')?.hasError('required') && businessInfoForm.get('email')?.touched" class="text-danger">
+                                  email is required!
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="mb-3">
+                                <label
+                                  for="userpassword"
+                                  style="padding-bottom: 6px"
+                                  >Password</label
+                                >
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  id="userpassword"
+                                  placeholder="Enter Password ..."
+                                  name="userpassword"
+                                  [(ngModel)]="password"
+                                  formControlName="password"
+                                  
+                                />
+                                <div *ngIf="businessInfoForm.get('password')?.hasError('required') && businessInfoForm.get('password')?.touched" class="text-danger">
+                                  password is required! Min len 6.
                                 </div>
                               </div>
                             </div>
