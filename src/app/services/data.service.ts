@@ -116,6 +116,14 @@ updateLeaveStatus(sav: Savel): Observable<any> {
 
     return this.httpClient.put(url, {params});
   }
+
+  signInOrganization(email: string, password: string): Observable<any>{
+    const params = new HttpParams()
+    .set('email', email)
+    .set('password', password)
+
+    return this.httpClient.get(`${this.baseUrl}/organization/signin`, {params});
+  }
 }
 
 
