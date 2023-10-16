@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -10,7 +11,7 @@ export class LoginComponent implements OnInit {
 email: any;
 password: any;
 
-  constructor(private dataService : DataService) { }
+  constructor(private dataService : DataService, private router : Router) { }
 
   ngOnInit(): void {
   }
@@ -18,6 +19,13 @@ password: any;
   signIn(){
     this.dataService.signInOrganization(this.email,this.password).subscribe(data =>{
       console.log(data);
+
+      debugger
+      localStorage.setItem('accessToken', data.access_token);
+
+      if(localStorage.getItem('accessToken')!==null){
+        this.router.navigate(['dynamic/dashboard']);
+            }
     }, (error) =>{
       console.log(error);
     })
@@ -34,6 +42,11 @@ password: any;
     if(res2){
       res2.style.display="block";
     }
+  }
+
+  redirectToRegister(){
+    this.router.navigate(['dynamic/onboarding']);
+
   }
 
 }
