@@ -107,10 +107,7 @@ updateLeaveStatus(sav: Savel): Observable<any> {
     .set('token', token)
     .set('organizationId',organizationId)
     
-
-    const url = `${this.baseUrl}/savetoken`;
-
-    return this.httpClient.put(url, {params});
+    return this.httpClient.put(this.baseUrl + '/savetoken', {}, {params});
   }
 
   signInOrganization(email: string, password: string): Observable<any>{

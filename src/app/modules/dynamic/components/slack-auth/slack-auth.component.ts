@@ -10,8 +10,8 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./slack-auth.component.css'],
 })
 export class SlackAuthComponent implements OnInit{
-
-   orgId : any;
+  codeParam : string | null = null;
+  orgId : any;
   // ide !:number;
   //  @Input() getIdFromOboard : any;
   constructor(private dataService : DataService, private httpClient : HttpClient){}
@@ -34,26 +34,26 @@ export class SlackAuthComponent implements OnInit{
   }
   
   saveToken(orgID : number): void {
-    const codeParam = new URLSearchParams(window.location.search).get('code');
-    if (!codeParam) {
+    this.codeParam = new URLSearchParams(window.location.search).get('code');
+    if (!this.codeParam) {
       alert('Invalid URL: Missing code parameter');
       return;
     }
    
     // console.log(this.orgId);
-    debugger
+    
     if (!this.orgId) {
       alert('Organization ID not found');
       return;
     }
-    
-  this.dataService.saveTokenForOrganization(codeParam, this.orgId)
+    debugger
+     this.dataService.saveTokenForOrganization(this.codeParam.toString(), this.orgId)
     .subscribe(
-      (response: any) => {
+      (response) => {
         console.log('Token saved:', response);
 
       },
-      (error: any) => {
+      (error) => {
         console.error('Error saving token:', error);
       }
     );
