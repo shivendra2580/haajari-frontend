@@ -170,7 +170,7 @@
                                   
                                 />
                                 <div *ngIf="businessInfoForm.get('password')?.hasError('required') && businessInfoForm.get('password')?.touched" class="text-danger">
-                                  password is required! Min len 6.
+                                  password is required! Min len 2.
                                 </div>
                               </div>
                             </div>
@@ -262,14 +262,14 @@
                                 aria-controls="collapseOne"
                                 [disabled]="businessInfoForm.invalid"
                                 (click)="setActive(1)"
-                                (click)="setBusinessInfoCompleted(); setLockbusinessInfoCompleted(); register()"                              >
+                                (click)="setBusinessInfoCompleted(); setLockbusinessInfoCompleted(); register()"                             >
                                 Save
                               </button>
                             </div>
                           </div>
                         </form>
                       </div>
-                    
+                      
                     </div>
                   </div>
                   <!-- ###################################################################################################3333-->

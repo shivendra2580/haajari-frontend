@@ -24,7 +24,7 @@ export class OnboardingComponent implements OnInit {
       this.businessInfoForm = this.fb.group({
         name: ['', Validators.required],
         email: ['', [Validators.required,Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(5)]],
+        password: ['', [Validators.required, Validators.minLength(6)]],
         country: ['', Validators.required],
         state: ['', Validators.required],
         organizationPic: [null, Validators.required],
@@ -165,6 +165,8 @@ export class OnboardingComponent implements OnInit {
     this.organizationPic = null;
   }
  
+  // eId:string="";
+  // pass:string="";
 
   register() {
     if (this.businessInfoForm.valid) {
@@ -172,7 +174,11 @@ export class OnboardingComponent implements OnInit {
       console.log(resultData);
      this.loginArray.organizationId=resultData.id;
      this.leaveData.orgId=resultData.id;
-     alert("Organization Registered successfully, Please Click on Shift Timings");
+    //  this.eId=resultData.email;
+    //  this.pass=resultData.password;
+    //  console.log(this.eId, this.pass);
+    //  this.signUp(this.eId, this.pass)
+    // alert("Organization Registered successfully, Please Click on Shift Timings");
      // this.resetForm2();
       // this.orgI = this.organization.id;
       this.orgI = resultData.id;
@@ -180,22 +186,16 @@ export class OnboardingComponent implements OnInit {
       //window.location.reload();
     });
     }
- // @ViewChild('myForm', {static: false}) myForm:any= NgForm;
-  // register() {
-  //   debugger
-  //   this.dataService.registerOnboardingDetails(this.name, this.state, this.country, this.organizationPic, this.flagOrganization, this.flagShiftTimings, this.flagQuestions, this.flagLeave).subscribe((resultData: any) => {
-  //     this.organization = resultData;
-  //     console.log(this.organization);
-  //     alert("Organization Registered successfully");
-  //     this.resetForm2();
-  //     this.orgId = this.organization.id;
-  //     console.log(this.orgId);
-  //     // this.dataService.setOrgId(this.orgId);
-  //     // this.dataService.orgId = this.orgId;
-  //     localStorage.setItem('orgId', this.orgId);
-  //   });
-    
   }
+
+
+  // signUp(eId :string , pass : string){
+  //   this.dataService.signUpOrganization(this.eId, this.pass).subscribe(data =>{
+  //     console.log(data);
+  //   }, (error) =>{
+  //     console.log(error);
+  //   })
+  // }
 
  
 
@@ -419,7 +419,7 @@ export class OnboardingComponent implements OnInit {
   onBtnClick(){
 
     if(this.count>=3){
-       this.router.navigate(['/dynamic/addtoslack']);
+       this.router.navigate(['/dynamic/login']);
     }
   }
 

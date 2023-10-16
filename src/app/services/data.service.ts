@@ -101,10 +101,6 @@ updateLeaveStatus(sav: Savel): Observable<any> {
     return this.httpClient.post(`http://localhost:8080/api/v1/attendance/save-shift-timings`, shiftTimingsData);
   }
 
-  // updateOrganizationFlag(organization: Organization): Observable<any> {
-  //   return this.httpClient.put(`${this.baseUrl}/update-organization/${organization.id}`, organization);
-  // }
-
  
   saveTokenForOrganization(token: string, organizationId: any): Observable<any> {
     const params = new HttpParams()
@@ -122,8 +118,17 @@ updateLeaveStatus(sav: Savel): Observable<any> {
     .set('email', email)
     .set('password', password)
 
-    return this.httpClient.get(`${this.baseUrl}/organization/signin`, {params});
+    return this.httpClient.get(`${this.baseUrl}/login`, {params});
   }
+
+  // signUpOrganization(email: string, password: string): Observable<any>{
+  //   const params = new HttpParams()
+  //   .set('email', email)
+  //   .set('password', password)
+
+  //   return this.httpClient.get(`${this.baseUrl}/create-user-firebase`, {params});
+  // }
+
 }
 
 
